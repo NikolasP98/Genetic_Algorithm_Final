@@ -3,19 +3,21 @@ aux = Funciones_apoyo.new
 
 
 class Condiciones
-	filas = 10;
-	columnas = 5;
-	nganadores = 5;
+	def initialize (filas, columnas, nganadores)
+		@filas = filas
+		@columnas = columnas
+		@nganadores = nganadores
+	end
 end
 
 class Genetico < Condiciones
-	filas = 10
-	columnas = 5
-	nganadores = 5
-	poblacion = [[filas],[columnas]]
-	poblacionTem = [[filas],[columnas]]
-	parejas = [filas]
-	ganadores = [nganadores]
+	def initialize (filas, columnas, nganadores)
+		super(filas, columnas, nganadores)
+	end
+	poblacion = [[@filas],[@columnas]]
+	poblacionTem = [[@filas],[@columnas]]
+	parejas = [@filas]
+	ganadores = [@nganadores]
 	sumatoria = 0
 	
 	def inciarPoblacion (poblacion)
@@ -82,12 +84,12 @@ class Genetico < Condiciones
 		for i in (0..parejas.length/2) do
 			ri = rand(0..3)
 			individuoA = poblacion[i][1].split(",")
-			parejaA = parejas[i]
-			cadAdn = ""
 			individuoB = poblacion[parejaA.to_i][1].split(",")
+			parejaA = parejas[i]
 			puntocruce = ri.to_i
+			cadAdn = ""
 
-			puts "Punto cruce [#{puntocruce}][#{Poblacion[i][0]}]\n[#{Poblacion[i][1]}][Cruzado con] [#{Poblacion[ParejaA.to_i][0]}]\n[#{Poblacion[ParejaA.to_i][1]}]"
+			puts "Punto cruce [#{puntocruce}][#{poblacion[i][0]}]\n[#{poblacion[i][1]}][Cruzado con] [#{poblacion[parejaA.to_i][0]}]\n[#{poblacion[parejaA.to_i][1]}]"
 			for t in (0..puntocruce) do
 				cadAdn += "#{individuoA[t]},"
 			end
@@ -184,7 +186,7 @@ class Genetico < Condiciones
 		end
 	end
 
-	def adaptilidad (poblacion ,sumatoria)
+	def adaptabilidad (poblacion ,sumatoria)
 		for i in (0..parejas.length) do 
 			poblacion[i][4] = "#{poblacion[i][2].to_i/sumatoria}"
 		end
@@ -206,4 +208,29 @@ class Genetico < Condiciones
 		puts cadena
 	end
 
+
+	def run ()
+		inciarPoblacion(poblacion)
+		verPoblacion(poblacion, false)
+		adaptados = 0
+		while adaptados < 961
+			convertir_individuo(poblacion)
+			adaptados = calidad_individuo(poblacion)
+			adaptabilidad(poblacion, sumatoria)
+			verPoblacion(poblacion, true)
+			seleccion_parejas(poblacion)
+			torneo(poblacion)
+			verGanadores(ganadores)
+			copiarse(poblacion, poblacionTem)
+			verPoblacion(poblacionTem, true)
+			seleccion_parejas(poblacion)
+			combinacion_mutacion(poblacion, poblacionTem)
+		end
+		adaptados = calidad_individuo(poblacion)
+		verPoblacion(poblacion, false)
+	end
 end
+
+genetico = Genetico.new(10, 5, 5)
+
+genetico.run()

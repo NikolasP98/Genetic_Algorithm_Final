@@ -25,3 +25,22 @@ class Funciones_apoyo
 		end
 	end
 end
+
+# class Perro
+# 	def initialize(a)
+# 		@animal = a
+# 		puts @animal.to_s
+# 	end
+# end
+
+# class Perrito < Perro
+# 	def initialize(a,b)
+# 		super(a)
+# 		@b = b
+# 		puts b.to_s
+# 	end
+# end
+
+# Perro.new("perro")
+
+# Perrito.new("pe", "rrrrro")
