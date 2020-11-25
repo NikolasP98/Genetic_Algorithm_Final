@@ -47,6 +47,7 @@ class Genetico < Condiciones
 			end
 		Poblacion[i][2] = "" + valor
 		sumatoria = valor
+		end
 	end
 
 	def calidad_individuo (poblacion)
@@ -82,14 +83,14 @@ class Genetico < Condiciones
 			parejaA = parejas[i]
 			cadAdn = ""
 			individuoB = poblacion[parejaA.to_i][1].split(",")
-			puntocruce = ri
+			puntocruce = ri.to_i
 
 			puts "Punto cruce [#{puntocruce}][#{Poblacion[i][0]}]\n[#{Poblacion[i][1]}][Cruzado con] [#{Poblacion[ParejaA.to_i][0]}]\n[#{Poblacion[ParejaA.to_i][1]}]"
 			for t in (0..puntocruce) do
-				cadAdn += "#{individuoA[t]}, "
+				cadAdn += "#{individuoA[t]},"
 			end
 			for t in (puntocruce..individuoA.length) do
-				cadAdn += "{#{individuoB[t]}, }"
+				cadAdn += "#{individuoB[t]},"
 			end
 			puts "Nuevo Individuo [#{cadAdn}]"
 			poblacionTem[i][0] = "#{i}"
@@ -103,6 +104,20 @@ class Genetico < Condiciones
 		individuoA = poblacion[mutado][1].split(",")
 		puts "**************************Mutacion********************************"
 		puts "****Individuo*****************************Resultado***************"
+		ri = rand(0..3)
+		gen = ri.to_i
+		if individuoA[gen] = 0
+			individuoA[gen] = 1
+		else
+			individuoA = 0
+		end
+		cadAdn = ""
+		for t in (0..individuoA.length)
+			cadAdn += "#{individuoA[t]},"
+		end
+		puts "[#{poblacion[mutado][0]}][#{poblacion[mutado][1]}]\nGen mutado [#{gen}]\nResultado => [#{poblacion[mutado][0]}][#{cadAdn}]"
+
+		poblacion[mutado][1] = cadAdn
 	end
 
 
@@ -188,4 +203,5 @@ class Genetico < Condiciones
 		end
 		puts cadena
 	end
+
 end
