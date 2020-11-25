@@ -1,3 +1,7 @@
+require_relative 'apoyo'
+
+auxiliar = Funciones_apoyo.new
+
 class Condiciones
 	filas = 10;
 	columnas = 5;
@@ -39,31 +43,29 @@ class Genetico < Condiciones
 		valor = 0
 		for i in (0..parejas.length) do
 			valor = 0
-			valores[] = Poblacion[i][1].split(";")
+			valores[] = poblacion[i][1].split(";")
 			indice = 0
-			for j in (0..valores.length) do
-				#parsedouble en ruby valor=valor+ (Double.parseDouble(valores[k])*Math.pow(2,indice));
+			for j in (valores.length-1..0) do
+				valor += valores[j].to_f * 2^indice
 				indice += 1
 			end
-		Poblacion[i][2] = "#{valor}"
+		poblacion[i][2] = "#{valor}"
 		sumatoria = valor
 		end
 	end
 
 	def calidad_individuo (poblacion)
-	   ' double mayor=Double.parseDouble(Poblacion[0][2]);  
-	   double valor=0;'
-		mayor = poblacion.to_f
+		mayor = poblacion[0][2].to_f
 		valor = 0
 		for i in (0..parejas.length) do 
-			# funcion_fx
+			valor = auxiliar.funcion_fx(poblacion[i][2].to_f)
 			poblacion [i][3] = "#{valor}"
 			if mayor < valor
 				mayor = valor
 			end
 		end
 		puts "********************Mejor Adaptado*************************"
-		puts "*************************  #{mayor}  *************************"  
+		puts "*************************#{mayor}*************************"  
 		return mayor     
 	end
 

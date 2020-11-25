@@ -68,7 +68,9 @@ public class Geneticos {
           sumaToria+=valor;       
         } //for externo         
     }//convertir_individuo
-    //la formula que indica la adaptabilidad del individuo
+	//la formula que indica la adaptabilidad del individuo
+	
+	
      public static double Calidad_Individuo(String [][] Poblacion){
        //columa que tiene el valor del individuo  
        double mayor=Double.parseDouble(Poblacion[0][2]);  
