@@ -22,7 +22,7 @@ class Genetico < Condiciones
 
 	def inciarPoblacion ()
 		puts "***********************************************************"
-		puts "********************Iniciar Poblacion***********************"
+		puts "********************Iniciar Poblacion**********************"
 		puts "***********************************************************"
 		individuo = ""
 		for i in (0..@parejas.length) do 
@@ -32,12 +32,12 @@ class Genetico < Condiciones
 				ra = rand(0..1)
 				individuo = ""
 				individuo ="#{ri.to_i} , #{ro.to_i} , #{ra.to_i} , #{ra.to_i} , #{ra.to_i}" 
-				poblacion[[i],[0]] = "#{i}"
-				poblacion[[i],[1]] = individuo
+				@poblacion[i][0] = "#{i}"
+				@poblacion[i][1] = individuo
 
 			end
-			poblacion[[i],[0]] = "#{i}"
-			poblacion[[i],[1]] = individuo
+			@poblacion[i][0] = "#{i}"
+			@poblacion[i][1] = individuo
 		end
 	end
 
@@ -210,24 +210,24 @@ class Genetico < Condiciones
 
 
 	def run ()
-		inciarPoblacion(@poblacion)
-		verPoblacion(@poblacion, false)
+		inciarPoblacion()
+		verPoblacion(false)
 		adaptados = 0
 		while adaptados < 961
-			convertir_individuo(@poblacion)
-			adaptados = calidad_individuo(@poblacion)
-			adaptabilidad(@poblacion, @sumatoria)
-			verPoblacion(@poblacion, true)
-			seleccion_parejas(@poblacion)
-			torneo(@poblacion)
-			verGanadores(@ganadores)
-			copiarse(@poblacion, @poblacionTem)
-			verPoblacion(@poblacionTem, true)
-			seleccion_parejas(@poblacion)
-			combinacion_mutacion(@poblacion, @poblacionTem)
+			convertir_individuo()
+			adaptados = calidad_individuo()
+			adaptabilidad()
+			verPoblacion(true)
+			seleccion_parejas()
+			torneo()
+			verGanadores()
+			copiarse()
+			verPoblacion(true)
+			seleccion_parejas()
+			combinacion_mutacion()
 		end
-		adaptados = calidad_individuo(@poblacion)
-		verPoblacion(@poblacion, false)
+		adaptados = calidad_individuo()
+		verPoblacion(false)
 	end
 end
 
