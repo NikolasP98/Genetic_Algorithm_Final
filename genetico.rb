@@ -13,20 +13,20 @@ end
 class Genetico < Condiciones
 	def initialize (filas, columnas, nganadores)
 		super(filas, columnas, nganadores)
+		@poblacion = Array.new(@filas){Array.new(@columnas)}
+		@poblacionTem = Array.new(@filas){Array.new(@columnas)}
+		@parejas = Array.new(@filas)
+		@ganadores = Array.new(@nganadores)
+		@sumatoria = 0
 	end
-	poblacion = [[@filas],[@columnas]]
-	poblacionTem = [[@filas],[@columnas]]
-	parejas = [@filas]
-	ganadores = [@nganadores]
-	sumatoria = 0
-	
-	def inciarPoblacion (poblacion)
+
+	def inciarPoblacion ()
 		puts "***********************************************************"
 		puts "********************Iniciar Poblacion***********************"
 		puts "***********************************************************"
 		individuo = ""
-		for i in (0..parejas.length) do 
-			for j in (0..parejas.length-4) do 
+		for i in (0..@parejas.length) do 
+			for j in (0..@parejas.length-4) do 
 				ri = rand(0..1)
 				ro = rand(0..1)
 				ra = rand(0..1)
@@ -41,7 +41,7 @@ class Genetico < Condiciones
 		end
 	end
 
-	def convertir_individuo (poblacion)
+	def convertir_individuo ()
 		valor = 0
 		for i in (0..parejas.length) do
 			valor = 0
@@ -56,7 +56,7 @@ class Genetico < Condiciones
 		end
 	end
 
-	def calidad_individuo (poblacion)
+	def calidad_individuo ()
 		mayor = poblacion[0][2].to_f
 		valor = 0
 		for i in (0..parejas.length) do 
@@ -186,9 +186,9 @@ class Genetico < Condiciones
 		end
 	end
 
-	def adaptabilidad (poblacion ,sumatoria)
+	def adaptabilidad ()
 		for i in (0..parejas.length) do 
-			poblacion[i][4] = "#{poblacion[i][2].to_i/sumatoria}"
+			@poblacion[i][4] = "#{poblacion[i][2].to_i/sumatoria}"
 		end
 	end
 
@@ -197,10 +197,10 @@ class Genetico < Condiciones
 		cadena = ""
 		for i in (0..filas) do
 			for j in (0..columnas) do
-				cadena += "[#{poblacion[i][k]} ]"
+				cadena += "[#{@poblacion[i][k]} ]"
 			end
 			if pareja 
-				cadena += "pareja #{parejas[i]} \n"
+				cadena += "pareja #{@parejas[i]} \n"
 			else
 				cadena += "#{"\n"}"
 			end
@@ -210,24 +210,24 @@ class Genetico < Condiciones
 
 
 	def run ()
-		inciarPoblacion(poblacion)
-		verPoblacion(poblacion, false)
+		inciarPoblacion(@poblacion)
+		verPoblacion(@poblacion, false)
 		adaptados = 0
 		while adaptados < 961
-			convertir_individuo(poblacion)
-			adaptados = calidad_individuo(poblacion)
-			adaptabilidad(poblacion, sumatoria)
-			verPoblacion(poblacion, true)
-			seleccion_parejas(poblacion)
-			torneo(poblacion)
-			verGanadores(ganadores)
-			copiarse(poblacion, poblacionTem)
-			verPoblacion(poblacionTem, true)
-			seleccion_parejas(poblacion)
-			combinacion_mutacion(poblacion, poblacionTem)
+			convertir_individuo(@poblacion)
+			adaptados = calidad_individuo(@poblacion)
+			adaptabilidad(@poblacion, @sumatoria)
+			verPoblacion(@poblacion, true)
+			seleccion_parejas(@poblacion)
+			torneo(@poblacion)
+			verGanadores(@ganadores)
+			copiarse(@poblacion, @poblacionTem)
+			verPoblacion(@poblacionTem, true)
+			seleccion_parejas(@poblacion)
+			combinacion_mutacion(@poblacion, @poblacionTem)
 		end
-		adaptados = calidad_individuo(poblacion)
-		verPoblacion(poblacion, false)
+		adaptados = calidad_individuo(@poblacion)
+		verPoblacion(@poblacion, false)
 	end
 end
 
