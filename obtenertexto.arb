@@ -1,0 +1,20 @@
+
+
+    
+    #leer documentos del elixir
+    File.open('D:\ULima Virtual\Lenguajes de programación\Proyecto_repo\Genetico\Elixir\resultadosX.txt', 'r') do |f1|
+        while linea = f1.gets
+      puts linea
+        end
+     end
+
+
+
+
+  
+
+
+
+
+
+

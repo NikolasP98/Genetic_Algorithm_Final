@@ -1,0 +1,16 @@
+
+
+
+def insertardatosTXT(datos)
+    
+        File.open('D:\ULima Virtual\Lenguajes de programación\Proyecto_repo\Genetico\Elixir\valoresx.txt', 'w') do |f2|
+            
+        f2.puts datos
+    
+        
+         end
+end
+    
+
+
+    

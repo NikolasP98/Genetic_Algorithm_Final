@@ -1,0 +1,13 @@
+
+# Ruby program for [] method in Matrix 
+   
+# Include matrix  
+require "matrix"
+   
+# Initialize a matrix  
+mat1 = Matrix[  [89 , 12, 12], 
+                [8,   5,  23], 
+                [1,   2,     9]]   
+   
+# Print the element at 2,3 
+puts  mat1[2, 2] 

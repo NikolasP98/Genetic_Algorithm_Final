@@ -60,6 +60,8 @@ class Genetico < Condiciones
 		mayor = poblacion[0][2].to_f
 		valor = 0
 		for i in (0..parejas.length) do 
+			#aux.insertardatosTXT(poblacion[i][2].to_f)
+			#valor = aux.leerTXT()
 			valor = aux.function_fx(poblacion[i][2].to_f)
 			poblacion [i][3] = "#{valor}"
 			if mayor < valor
@@ -208,7 +210,7 @@ class Genetico < Condiciones
 		puts cadena
 	end
 
-
+	
 	def run ()
 		inciarPoblacion(@poblacion)
 		verPoblacion(@poblacion, false)
