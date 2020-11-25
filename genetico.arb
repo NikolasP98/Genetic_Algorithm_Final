@@ -45,7 +45,7 @@ class Genetico < Condiciones
 				#parsedouble en ruby valor=valor+ (Double.parseDouble(valores[k])*Math.pow(2,indice));
 				indice += 1
 			end
-		Poblacion[i][2] = "" + valor
+		Poblacion[i][2] = "#{""} #{valor}"
 		sumatoria = valor
 		end
 	end
@@ -57,13 +57,13 @@ class Genetico < Condiciones
 		valor = 0
 		for i in (0..parejas.length) do 
 			# funcion_fx
-			poblacion [i][3] = "" + valor
+			poblacion [i][3] = "#{""} #{valor}"
 			if mayor < valor
 				mayor = valor
 			end
 		end
 		puts "********************Mejor Adaptado*************************"
-		puts "************************* + #{mayor} + ****************************"  
+		puts "#{"*************************"}  #{mayor}  #{"*************************"}"  
 		return mayor     
 	end
 
@@ -128,8 +128,8 @@ class Genetico < Condiciones
 		t = 0
 		for i in (0..ganadores.length) do
 			ganador = ganadores[i].to_i
-			poblacionTem[indice][0] = "" + (i+t)
-			poblacionTem[indice+1][0] = "" + (i+1+t)
+			poblacionTem[indice][0] = "#{""} #{i+t}"
+			poblacionTem[indice+1][0] = "#{""} #{i+1+t}"
 			for j in (1..columnas) do
 				poblacionTem[indice][f] = poblacion[ganador][f]          
 				poblacionTem[indice+1][f] = poblacion[ganador][f]
@@ -184,7 +184,7 @@ class Genetico < Condiciones
 
 	def adaptilidad (poblacion ,sumatoria)
 		for i in (0..parejas.length) do 
-			poblacion[i][4] = "" + (poblacion[i][2].to_i/sumatoria)
+			poblacion[i][4] = "#{""} #{poblacion[i][2].to_i/sumatoria}"
 		end
 	end
 
