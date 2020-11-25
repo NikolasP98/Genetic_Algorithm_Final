@@ -25,11 +25,3 @@ class Funciones_apoyo
 		end
 	end
 end
-
-array = Array.new(3) { Array.new(4)}
-
-
-array[1][1] = 2
-array[1][2] = 4
-
-array
