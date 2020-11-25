@@ -67,6 +67,8 @@ class Genetico < Condiciones
 		return mayor     
 	end
 
+
+
 	def combinacion_mutacion (poblacion , poblacionTem)
 		puts "********************Combiancion y Mutacion*****************"
 		puts "***********************************************************"
@@ -83,10 +85,28 @@ class Genetico < Condiciones
 			individuoB = poblacion[parejaA.to_i][1].split(",")
 			puntocruce = ri
 
-			puts "Punto cruce [+ #{puntocruce} +][+ #{Poblacion[i][0]} +]\n[+ #{Poblacion[i][1]}+][Cruzado con] [+ #{Poblacion[ParejaA.to_i][0]}+]\n[+ #{Poblacion[ParejaA.to_i][1]}+]"
+			puts "Punto cruce [#{puntocruce}][#{Poblacion[i][0]}]\n[#{Poblacion[i][1]}][Cruzado con] [#{Poblacion[ParejaA.to_i][0]}]\n[#{Poblacion[ParejaA.to_i][1]}]"
+			for t in (0..puntocruce) do
+				cadAdn += "#{individuoA[t]}, "
+			end
+			for t in (puntocruce..individuoA.length) do
+				cadAdn += "{#{individuoB[t]}, }"
+			end
+			puts "Nuevo Individuo [#{cadAdn}]"
+			poblacionTem[i][0] = "#{i}"
+			poblacionTem[i][1] = cadAdn
 		end
-
+		for i in (0..parejas.length) do
+			poblacion[i][0] = poblacionTem[i][0]
+			poblacion[i][1] = poblacionTem[i][1]
+		end
+		mutado = (parejas.length/2)+1
+		individuoA = poblacion[mutado][1].split(",")
+		puts "**************************Mutacion********************************"
+		puts "****Individuo*****************************Resultado***************"
 	end
+
+
 
 	def copiarse (poblacion , poblacionTem)
 		puts "********************Copiarse*******************************"
