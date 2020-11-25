@@ -5,7 +5,7 @@ class Condiciones
 end
 
 class Genetico < Condiciones
-	filas = 10
+	filas = 100
 	columnas = 5
 	nganadores = 5
 	poblacion = [[filas],[columnas]]
