@@ -66,17 +66,9 @@ class Genetico < Condiciones
 	def calidad_individuo ()
 		mayor = @poblacion[0][2].to_f
 		valor = 0
-<<<<<<< HEAD
-		for i in (0..parejas.length) do 
-			#aux.insertardatosTXT(poblacion[i][2].to_f)
-			#valor = aux.leerTXT()
-			valor = aux.function_fx(poblacion[i][2].to_f)
-			poblacion [i][3] = "#{valor}"
-=======
 		for i in (0..@parejas.length) do 
 			valor = aux.function_fx(@poblacion[i][2].to_f)
 			@poblacion [i][3] = "#{valor}"
->>>>>>> 561a033833649606d2a4e5968012523921e67e3d
 			if mayor < valor
 				mayor = valor
 			end
