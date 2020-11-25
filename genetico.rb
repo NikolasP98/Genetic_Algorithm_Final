@@ -3,20 +3,19 @@ aux = Funciones_apoyo.new
 
 
 class Condiciones
-	def initialize (filas, columnas, nganadores)
+	def initialize (filas, nganadores)
 		@filas = filas
-		@columnas = columnas
 		@nganadores = nganadores
 	end
 end
 
 class Genetico < Condiciones
-	def initialize (filas, columnas, nganadores)
-		super(filas, columnas, nganadores)
-		@poblacion = Array.new(@filas){Array.new(@columnas)}
-		@poblacionTem = Array.new(@filas){Array.new(@columnas)}
-		@parejas = Array.new(@filas)
-		@ganadores = Array.new(@nganadores)
+	def initialize (filas, nganadores)
+		super(filas, nganadores)
+		@poblacion = Array.new(filas){Array.new(2)}
+		@poblacionTem = Array.new(filas){Array.new(2)}
+		@parejas = filas.to_i
+		@ganadores = Array.new(nganadores)
 		@sumatoria = 0
 	end
 
@@ -24,35 +23,43 @@ class Genetico < Condiciones
 		puts "***********************************************************"
 		puts "********************Iniciar Poblacion**********************"
 		puts "***********************************************************"
-		individuo = ""
-		for i in (0..@parejas.length) do 
-			for j in (0..@parejas.length-4) do 
+
+
+
+		for i in (0..@parejas) do 
 				ri = rand(0..1)
 				ro = rand(0..1)
 				ra = rand(0..1)
-				individuo = ""
-				individuo ="#{ri.to_i} , #{ro.to_i} , #{ra.to_i} , #{ra.to_i} , #{ra.to_i}" 
-				@poblacion[i][0] = "#{i}"
-				@poblacion[i][1] = individuo
+				
+				binario = "#{ri.to_i}#{ro.to_i}#{ra.to_i}#{ra.to_i}#{ra.to_i}"
 
-			end
-			@poblacion[i][0] = "#{i}"
-			@poblacion[i][1] = individuo
+				# puts binario
+
+				#1: 10111
+				#2: 01000
+				#3: 10111
+
+				@poblacion[i, 0] = "#{i+1}: "
+				@poblacion[i, 1] = binario
+
 		end
+
+		puts @poblacion[1,0]
 	end
 
 	def convertir_individuo ()
 		valor = 0
-		for i in (0..@parejas.length) do
-			valor = 0
-			valores[] = @poblacion[i][1].split(";")
+		for i in (0..@parejas) do
+			valores = []
+			valores = @poblacion[i, 1].split('').map(&:to_i)
 			indice = 0
 			for j in (@valores.length-1..0) do
 				valor += @valores[j].to_f * 2^indice
 				indice += 1
 			end
-		@poblacion[i][2] = "#{valor}"
-		@sumatoria = valor
+			
+			@poblacion[i][2] = "#{valor}"
+			@sumatoria = valor
 		end
 	end
 
@@ -192,14 +199,14 @@ class Genetico < Condiciones
 		end
 	end
 
-	def verPoblacion ()
-		puts "********************Pablacion Actual***********************"
+	def verPoblacion (pareja)
+		puts "********************Poblacion Actual***********************"
 		cadena = ""
-		for i in (0..@filas) do
-			for j in (0..columnas) do
-				cadena += "[#{@poblacion[i][k]} ]"
+		for i in (0..@parejas) do
+			for j in (0..2) do
+				cadena += "[#{@poblacion[i, j]} ]"
 			end
-			if @pareja 
+			if pareja 
 				cadena += "pareja #{@parejas[i]} \n"
 			else
 				cadena += "#{"\n"}"
@@ -231,6 +238,6 @@ class Genetico < Condiciones
 	end
 end
 
-genetico = Genetico.new(10, 5, 5)
+genetico = Genetico.new(5, 5)
 
 genetico.run()
