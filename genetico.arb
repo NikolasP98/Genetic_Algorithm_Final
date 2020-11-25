@@ -25,12 +25,12 @@ class Genetico < Condiciones
 				ro = rand(0..1)
 				ra = rand(0..1)
 				individuo = ""
-				individuo ="#{ri.to_i} #{","} #{ro.to_i} #{","} #{ra.to_i} #{","} #{ra.to_i} #{","} #{ra.to_i}" 
-				poblacion[[i],[0]] = "#{""} #{i}"
+				individuo ="#{ri.to_i} , #{ro.to_i} , #{ra.to_i} , #{ra.to_i} , #{ra.to_i}" 
+				poblacion[[i],[0]] = "#{i}"
 				poblacion[[i],[1]] = individuo
 
 			end
-			poblacion[[i],[0]] = "#{""} #{i}"
+			poblacion[[i],[0]] = "#{i}"
 			poblacion[[i],[1]] = individuo
 		end
 	end
@@ -45,7 +45,7 @@ class Genetico < Condiciones
 				#parsedouble en ruby valor=valor+ (Double.parseDouble(valores[k])*Math.pow(2,indice));
 				indice += 1
 			end
-		Poblacion[i][2] = "#{""} #{valor}"
+		Poblacion[i][2] = "#{valor}"
 		sumatoria = valor
 		end
 	end
@@ -57,13 +57,13 @@ class Genetico < Condiciones
 		valor = 0
 		for i in (0..parejas.length) do 
 			# funcion_fx
-			poblacion [i][3] = "#{""} #{valor}"
+			poblacion [i][3] = "#{valor}"
 			if mayor < valor
 				mayor = valor
 			end
 		end
 		puts "********************Mejor Adaptado*************************"
-		puts "#{"*************************"}  #{mayor}  #{"*************************"}"  
+		puts "*************************  #{mayor}  *************************"  
 		return mayor     
 	end
 
@@ -128,8 +128,8 @@ class Genetico < Condiciones
 		t = 0
 		for i in (0..ganadores.length) do
 			ganador = ganadores[i].to_i
-			poblacionTem[indice][0] = "#{""} #{i+t}"
-			poblacionTem[indice+1][0] = "#{""} #{i+1+t}"
+			poblacionTem[indice][0] = "#{i+t}"
+			poblacionTem[indice+1][0] = "#{i+1+t}"
 			for j in (1..columnas) do
 				poblacionTem[indice][f] = poblacion[ganador][f]          
 				poblacionTem[indice+1][f] = poblacion[ganador][f]
@@ -148,7 +148,7 @@ class Genetico < Condiciones
 		gano = 0
 		for i in (0..ganadores.length) do 
 			gano = ganadores[i].to_i
-			puts "#{"["} #{poblacion[gano][0]} #{"]"} #{"["} #{poblacion[gano][1]} #{"]"} #{"["} #{poblacion[gano][2]} #{"]"} #{"["} #{poblacion[gano][3]} #{"]"}"
+			puts "[ #{poblacion[gano][0]} ] [ #{poblacion[gano][1]} ] [ #{poblacion[gano][2]} ] [ #{poblacion[gano][3]} ]"
 		end
 	end
 	
@@ -163,7 +163,7 @@ class Genetico < Condiciones
 			desempenoA = poblacion[i][3];
 			parejaA = parejas[i];          
 			desempenoB = poblacion[parejaA.to_i][3];
-			puts "#{"["} #{poblacion[i][0]} #{"]"} #{"["} #{poblacion[i][1]} #{"]"} #{"["} #{poblacion[i][2]} #{"]"} #{"["} #{poblacion[i][3]} #{"]"}"
+			puts "[ #{poblacion[i][0]} ] [ #{poblacion[i][1]} ] [ #{poblacion[i][2]} ] [ #{poblacion[i][3]} ]"
 			if desempenoA.to_f >= desempenoB.to_f
 				ganadores[indP] = poblacion[i][0]
 			else
@@ -184,7 +184,7 @@ class Genetico < Condiciones
 
 	def adaptilidad (poblacion ,sumatoria)
 		for i in (0..parejas.length) do 
-			poblacion[i][4] = "#{""} #{poblacion[i][2].to_i/sumatoria}"
+			poblacion[i][4] = "#{poblacion[i][2].to_i/sumatoria}"
 		end
 	end
 
@@ -193,12 +193,12 @@ class Genetico < Condiciones
 		cadena = ""
 		for i in (0..filas) do
 			for j in (0..columnas) do
-				cadena += "#{"["} #{poblacion[i][k]} #{"]"}"
+				cadena += "[#{poblacion[i][k]} ]"
 			end
 			if pareja 
-				cadena += "#{"pareja"} #{parejas[i]} #{"\n"}"
+				cadena += "pareja #{parejas[i]} \n"
 			else
-				cadena += "#{""} #{"\n"}"
+				cadena += "#{"\n"}"
 			end
 		end
 		puts cadena
