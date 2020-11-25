@@ -1,6 +1,6 @@
-require_relative 'apoyo'
+require_relative "apoyo"
+aux = Funciones_apoyo.new
 
-auxiliar = Funciones_apoyo.new
 
 class Condiciones
 	filas = 10;
@@ -58,7 +58,7 @@ class Genetico < Condiciones
 		mayor = poblacion[0][2].to_f
 		valor = 0
 		for i in (0..parejas.length) do 
-			valor = auxiliar.funcion_fx(poblacion[i][2].to_f)
+			valor = aux.function_fx(poblacion[i][2].to_f)
 			poblacion [i][3] = "#{valor}"
 			if mayor < valor
 				mayor = valor
