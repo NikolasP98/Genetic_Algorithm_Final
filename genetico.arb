@@ -5,7 +5,7 @@ class Condiciones
 end
 
 class Genetico < Condiciones
-	filas = 100
+	filas = 10
 	columnas = 5
 	nganadores = 5
 	poblacion = [[filas],[columnas]]
@@ -19,19 +19,18 @@ class Genetico < Condiciones
 		puts "********************Iniciar Poblacion***********************"
 		puts "***********************************************************"
 		individuo = ""
-		ri = rand(0..1)
-		ro = rand(0..1)
-		ra = rand(0..1)
 		for i in (0..parejas.length) do 
 			for j in (0..parejas.length-4) do 
+				ri = rand(0..1)
+				ro = rand(0..1)
+				ra = rand(0..1)
 				individuo = ""
-				individuo = ri.to_i + ro.to_i + ra.to_i + ra.to_i + ra.to_i
-
-				poblacion[[i],[0]] = "" + i
+				individuo ="#{ri.to_i} #{","} #{ro.to_i} #{","} #{ra.to_i} #{","} #{ra.to_i} #{","} #{ra.to_i}" 
+				poblacion[[i],[0]] = "#{""} #{i}"
 				poblacion[[i],[1]] = individuo
 
 			end
-			poblacion[[i],[0]] = "" + i
+			poblacion[[i],[0]] = "#{""} #{i}"
 			poblacion[[i],[1]] = individuo
 		end
 	end
